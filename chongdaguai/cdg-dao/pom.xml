@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>cdg.parent</artifactId>
+        <groupId>com.chongdaguai</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.chongdaguai</groupId>
+      <artifactId>cdg-dao</artifactId>
+      <packaging>jar</packaging>
+      <name>cdg-dao Maven Webapp</name>
+      <url>http://maven.apache.org</url>
+
+
+   <dependencies>
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>${mysql.connector.java.version}</version>
+        </dependency>
+
+     <!-- mybatis 组件 -->
+     <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis.generator.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+  </dependencies>
+
+     <build>
+        <finalName>cdg-dao</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+              <!-- 是否替换资源中的属性-->
+              <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+   <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.source.level}</source>
+                    <target>${java.target.level}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                  <!-- <compilerArguments> <extdirs>src\main\library</extdirs> </compilerArguments> -->
+                  <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.cdg</groupId>
+                        <artifactId>dao</artifactId>
+                        <version>1.0</version>
+                        <scope>system</scope>
+                        <systemPath>${project.basedir}/target/cdg-dao.jar</systemPath>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>

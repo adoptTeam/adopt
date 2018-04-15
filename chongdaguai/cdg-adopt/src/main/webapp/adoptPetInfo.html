@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!--禁止缩放-->
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <!--全屏显示-->
+    <meta content="telephone=no" name="format-detection"/>
+    <meta name="format-detection" content="telephone=yes"/>
+    <!--告诉设备忽略将页面中的数字识别为电话号码-->
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <!-- 隐藏状态栏-->
+    <link href="css/baes.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <title>宠小乖</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common/common.js"></script>
+</head>
+
+<body>
+<section>
+    <div class="banner_xq">
+        <div class="banner">
+            <!-- Swiper -->
+            <div class="swiper-container" id="demo1">
+                <div class="swiper-wrapper" id="photo">
+                    <!--<div class="swiper-slide">
+                        &lt;!&ndash;<div class="banner-number"><span class="index"></span>/<span class="number"></span></div>&ndash;&gt;
+                        <a href="#"><img src="images/banner_xq_1.jpg"></a></div>-->
+                    <!--<div class="swiper-slide">
+                        <div class="banner-number"><span class="index"></span>/<span class="number"></span></div>
+                        <a href="#"><img src="images/banner_xq_1.jpg"></a></div>
+                    <div class="swiper-slide">
+                        <div class="banner-number"><span class="index"></span>/<span class="number"></span></div>
+                        <a href="#"><img src="images/banner_xq_1.jpg"></a></div>-->
+                </div>
+                <!-- Add Pagination -->
+            </div>
+            <!-- Swiper JS -->
+        </div>
+    </div>
+    <div class="details">
+        <div class="sc_box" id="collectionState"><img src="images/sc_1.png"><span>未收藏</span></div>
+        <div class="details_1">
+            <div class="de_1">
+                <h3 id="petName"></h3>
+                <h4 id="comments"><!--<span class="c_0">已打疫苗</span><span class="c_1">赠20kg狗粮</span><span
+                        class="c_2">已驱虫</span>--></h4>
+            </div>
+            <div class="de_2">
+                <h3><i><img src="images/ic_1.png"></i><span id="location"></span></h3>
+                <h4><i><img src="images/icon_2.png"></i><span>已有<em id="browseCount"></em>人浏览</span></h4>
+            </div>
+            <div class="de_3">
+                <h3><i><img src="images/ic_4.png"></i><span>小乖想说：</span></h3>
+                <p id="petTell"></p>
+            </div>
+        </div>
+        <div class="details_2">
+            <div class="de_top">
+                <div class="de_l"><i><img src="images/ic_3.png"></i><span>小乖信息</span></div>
+                <div class="de_r"><span><i id="createTime">2天前</i>发布</span></div>
+            </div>
+            <ul>
+                <li>
+                    <div class="pic"><span id="breed">中华田园犬</span><i>宠物品种</i></div>
+                </li>
+                <li>
+                    <div class="pic"><span id="sex">雄性</span><i>小乖性别</i></div>
+                </li>
+                <li>
+                    <div class="pic"><span id="age">3岁半</span><i>小乖年龄</i></div>
+                </li>
+                <li>
+                    <div class="pic"><span><label id="weight">4</label>KG</span><i>小乖体重</i></div>
+                </li>
+                <li>
+                    <div class="pic"><span id="birthControl">未绝育</span><i>是否绝育</i></div>
+                </li>
+                <li>
+                    <div class="pic"><span id="vaccineTime">2017/12/12</span><i>上次疫苗时间</i></div>
+                </li>
+            </ul>
+        </div>
+        <div class="details_3">
+            <div class="de_top">
+                <div class="de_l"><i><img src="images/ic_4.png"></i><span>体验式领养说明</span></div>
+            </div>
+            <ul>
+                <li>
+                    <div class="top_cc"><span>1</span><b>什么是体验式领养？</b></div>
+                    <p>领养代替购买，爱心融入家庭，协同体验领养。随着社会发展，流浪宠物越来越多，也对社会造成了很多负面情况。社会各地宠物收容机构、社会爱心救助者也陆续减少，为了更好的让爱心融入家庭、人类和小乖们感情更加融洽，请我们一起进行体验式领养。</p>
+                </li>
+                <li>
+                    <div class="top_cc"><span>2</span><b>体验式领养的流程</b></div>
+                    <p><img src="images/details_img.jpg"></p>
+                </li>
+                <li>
+                    <div class="top_cc"><span>3</span><b>体验式领养适合我么？</b></div>
+                    <p>如果您有以下其中一个情感因素，那您真的该来和我们一起进行体验式领养了：<br/>
+                        ①	想伴养小乖，却纠结于我真的能够和她处的来吗？<br/>
+                        ②我喜欢小乖，却不想进行买卖这种伤害类行动；<br/>
+                        ③国家允许“二孩儿”了，目前您家伴有几位小乖？<br/>
+                        ④和小乖有深厚感情，想再给自己找个伴；<br/>
+                        还有，我想让流浪的小乖们来我家玩……<br/>
+                    </p>
+                </li>
+                <li>
+                    <div class="top_cc"><span>4</span><b>体验式领养保障金</b></div>
+                    <p>为了在领养期间内，有效保障小乖的生命安全，需在进行领养前缴纳领养保障金，体验周期为30天。周期后，若想和小乖一起继续生活，保障金将在申请退还的一到两个工作日返还到您的账户；周期内，和小乖相处不善，可申请让工作人员上门领回，保障金在工作人员领回的一到两个工作日返还到您的账户。</p>
+                </li>
+            </ul>
+        </div>
+        <div class="details_4">
+            <div class="deta_box" id="commentAndReply">
+                <!--<div class="deta_top"><i><img src="images/ic_5.png"></i><span>宠友点评 <em>（2 条）</em></span><a href="#"
+                                                                                                           onclick="toComment()">我要点评&gt;</a>
+                </div>
+                <ul>-->
+                    <!--<li>
+                        <div class="deta_xt"><img src="images/circle_tx.jpg"></div>
+                        <div class="deta_cen">
+                            <div class="de_1">奔跑的小妞 <span>（182****3419）</span></div>
+                            <div class="de_2"><i><img src="">北京海淀</i><span>2017-04-20 18:20:26</span>
+                            </div>
+                            <div class="de_3">
+                                <p>我家的小黄又到换毛季节了，真实麻烦了~</p>
+                                <p><span>店家回复：</span>都是,这个就是换毛季，淡定~</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cur">
+                        <div class="deta_xt"><img src="images/circle_tx.jpg"></div>
+                        <div class="deta_cen">
+                            <div class="de_1">奔跑的小妞 <span>（182****3419）</span></div>
+                            <div class="de_2"><i><img src="images/icon_4.png">北京海淀</i><span>2017-04-20 18:20:26</span>
+                            </div>
+                            <div class="de_3">
+                                <p>我家的小黄又到换毛季节了，真实麻烦了~</p>
+                                <p><span>店家回复：</span>都是,这个就是换毛季，淡定~</p>
+                            </div>
+                        </div>
+                    </li>-->
+                <!--</ul>-->
+            </div>
+            <div class="more" style="margin-bottom: 30px"><a href="">没有更多评论了&gt;&gt;</a></div>
+        </div>
+    </div>
+    <div class="details_btn" style="margin-bottom: 50px;margin-top: 10px;">
+        <a href="tel:18333602050" class="cur"><i><img src="images/icon_5.png"></i><span>免费咨询</span></a>
+        <a id="toAdoptConfirm"  href="javascript:void(0)" class="cuc"></a>
+    </div>
+</section>
+<footer id="footer"></footer>
+<script src="js/swiper.min.js"></script>
+<script src="js/common/common.js"></script>
+
+<script>
+    //底部信息
+    footer();
+    var token = getToken();
+
+    var swiper = new Swiper('#demo1', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 3000,
+        autoplayDisableOnInteraction: false
+    });
+    var petId = location.search.substring(1).split("=")[1];
+    $(function () {
+        $(".number").text($(".swiper-slide").size());
+        $(".swiper-slide").each(function () {
+            $(this).find(".index").text($(this).index() + 1);
+        })
+
+        adoptViewLog();
+        getPetInfo();
+        getCollectionInfo();
+        getPetAdoptState();
+        getCommentAndReplyInfo();
+    })
+
+    var getPetAdoptState = function(){
+        $.ajax({
+            url: baseHost + 'littlePet/queryPetAdoptState',
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                    var adoptState = resp.data;
+                    if(adoptState){
+                        document.getElementById("toAdoptConfirm").href = "javascript:void(0)";
+                        document.getElementById("toAdoptConfirm").innerHTML = "小乖已被领养";
+                    }else{
+                        document.getElementById("toAdoptConfirm").href = "adoptConfirm.html?petId=" + petId;
+                        document.getElementById("toAdoptConfirm").innerHTML = "<i><img src='images/icon_6.png'></i><span>我要体验领养</span>";
+                    }
+            },
+            error: function () {
+                alert("出错了");
+            }
+        })
+    }
+
+    var getPetInfo = function () {
+        $.ajax({
+            url: baseHost + 'littlePet/queryPetInfoByPetId',
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                if (resp.msg == "ok" && resp.data != "" && resp.data != null) {
+                    var pet = resp.data;
+                    document.getElementById("petName").innerHTML = pet.name;
+                    document.getElementById("weight").innerHTML = pet.weight;
+                    document.getElementById("location").innerHTML = pet.location;
+                    document.getElementById("petTell").innerHTML = pet.petTell;
+                    document.getElementById("sex").innerHTML = pet.strSex;
+                    document.getElementById("birthControl").innerHTML = pet.strBirthControl;
+                    document.getElementById("age").innerHTML = pet.age;
+                    document.getElementById("vaccineTime").innerHTML = pet.strVaccineTime;
+                    document.getElementById("browseCount").innerHTML = pet.browseCount;
+                    document.getElementById("createTime").innerHTML = pet.strCreateTime;
+                    document.getElementById("breed").innerHTML = pet.breed;
+
+                    var photo = pet.photo;
+                    if (photo.length > 0) {
+                        var photos = "";
+                        for (var i = 0; i < photo.length; i++) {
+                            photos +=
+                                "<div class='swiper-slide'><a href='#'><img src='" + photo[i] + "'></a></div>";
+                            /* <div class='banner-number'><span class='index'></span>/<span class='number'></span>" +
+                                "</div> */
+                        }
+                        document.getElementById("photo").innerHTML = photos;
+                    }
+
+                    var comments = pet.arrayComments;
+                    if (comments.length > 0) {
+                        var commentItem = "";
+                        for (var i = 0; i < comments.length; i++) {
+                            if (i == 0) {
+                                commentItem += "<span class='c_0'>" + comments[i] + "</span>";
+                            } else if (i == 1) {
+                                commentItem += "<span class='c_1'>" + comments[i] + "</span>";
+                            } else {
+                                commentItem += "<span class='c_2'>" + comments[i] + "</span>";
+                            }
+                        }
+                        document.getElementById("comments").innerHTML = commentItem;
+                    }
+                } else {
+                    alert("未成功获取小乖信息");
+                }
+            },
+            error: function () {
+                alert("出错了");
+            }
+        })
+    }
+
+    var getCollectionInfo = function () {
+        $.ajax({
+            url: baseHost + 'littlePet/getRecordState',
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                if (resp.data != null && resp.data != '' && resp.data != "undefined") {
+                    document.getElementById("collectionState").innerHTML = "<img src='images/sc_2.png' onclick='delCollection();'><span>已收藏</span>";
+                } else {
+                    document.getElementById("collectionState").innerHTML = "<img src='images/sc_1.png' onclick='adoptCollection()'><span>未收藏</span>";
+                }
+            },
+            error: function () {
+                alert("未成功获取小乖收藏状态");
+            }
+        })
+    }
+
+    var adoptCollection = function () {
+        $.ajax({
+            url: baseHost + "littlePet/addCollectionLog",
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                if (resp != null && resp.data != null && resp.data) {
+                    document.getElementById("collectionState").innerHTML = "<img src='images/sc_2.png' onclick='delCollection();'><span>已收藏</span>";
+                } else {
+                    alert("收藏失败");
+                }
+            },
+            error: function () {
+                alert("系统问题，收藏失败");
+            }
+        })
+    }
+
+    var adoptViewLog = function () {
+        $.ajax({
+            url: baseHost + "littlePet/addViewLog",
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                getPetInfo();
+            },
+            error: function () {
+                alert("系统问题，收藏失败");
+            }
+        })
+    }
+
+    var delCollection = function () {
+        $.ajax({
+            url: baseHost + "littlePet/delRecordCollection",
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                if (resp != null && resp.data != null && resp.data) {
+                    document.getElementById("collectionState").innerHTML = "<img src='images/sc_1.png' onclick='adoptCollection()'><span>未收藏</span>";
+                } else {
+                    alert("收藏失败");
+                }
+            },
+            error: function () {
+                alert("系统问题，收藏失败");
+            }
+        })
+    }
+
+    var getCommentAndReplyInfo = function () {
+        $.ajax({
+            url: baseHost + 'littlePet/getCommentAndReplyByPetId',
+            headers: {"token": token},
+            data: {"petId": petId},
+            dataType: "json",
+            success: function (resp) {
+                var commentAndReply = "<div class='deta_top'><i><img src='images/ic_5.png'></i><span>宠友点评 <em>（" + resp.data.length + "条）</em></span><a href='comment.html?petId=" + petId + "'>我要点评&gt;</a></div><ul>";
+                if (resp.data != null && resp.data != '' && resp.data != "undefined") {
+                    for (var i = 0; i < resp.data.length; i++) {
+                        var item = resp.data[i];
+                        var phone = '';
+                        if(item.strPhone == null || item.strPhone == ''){
+                            var phone = '未绑定';
+                        }else{
+                            phone = item.strPhone;
+                        }
+                        commentAndReply +=
+                            "<li><div class='deta_xt'><img src='"+ item.user.headPortrait + "'></div>" +
+                            "<div class='deta_cen'>" +
+                            "<div class='de_1'>" + item.userNickname + "<span>（"+ phone + "）</span></div>" +
+                                "<div class='de_2'><i><img src='images/icon_4.png'>" + "北京海淀" + "</i><span>" + item.strCommentCreateTime + "</span></div>" +
+                                "<div class='de_3'>" +
+                                "<p>" + item.commentContent + "</p>";
+                        if (item.reply != "" && item.reply != null && item.reply.replyContent != null && item.reply.replyContent != "") {
+                            commentAndReply += "<p><span>店家回复：</span>" + item.reply.replyContent + "</p>";
+                        }
+                        commentAndReply += "</div>" +
+                                "</div>" +
+                                "</li>";
+                    }
+                }
+                document.getElementById("commentAndReply").innerHTML = commentAndReply + "</ul>";
+            },
+            error: function () {
+                alert("未成功获取小乖收藏状态");
+            }
+        })
+    }
+</script>
+</body>
+</html>

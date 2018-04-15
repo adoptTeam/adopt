@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pet</title>
+    <script src="../js/common/common.js"></script>
+</head>
+<body>
+<div style="top:20px;width:950px">
+    模糊查询条件(petId,name,sex,breed,petState,location)：<input type="text" id="condition" value=""
+                                                          style="width:30%;margin-right:20px"><input type="button"
+                                                                                                     id="btnQuery"
+                                                                                                     value="查询"
+                                                                                                     onclick="doQuery()"><br/>
+    <table id="petInfoTB" border="1">
+        <tr border="1">
+            <td style="width:52px">序号</td>
+            <td style="width:52px">宠物名称</td>
+            <td style="width:52px">性别</td>
+            <td style="width:52px">生日</td>
+            <td style="width:52px">品种</td>
+            <td style="width:52px">体重</td>
+            <td style="width:52px">是否节育</td>
+            <td style="width:52px">所在地</td>
+            <td style="width:52px">上次疫苗时间</td>
+            <td style="width:52px">备注</td>
+            <td style="width:52px">状态</td>
+        </tr>
+    </table>
+</div>
+<div style="position:absolute;width:40%;left:950px;top:20px">
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="petId" placeholder="请输入petId"
+           placeholder="" value=""/>:petId <br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="name" placeholder="请输入name" value=""/>:名称<br/>
+    <select type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="sex">
+        <option value="1" selected>男</option>
+        <option value="0">女</option>
+    </select>:性别<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="birthday" placeholder="请输入birthday"
+           value=""/>:生日<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="breed" placeholder="请输入breed" value=""/>:品种<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="weight" placeholder="请输入weight" value=""/>:体重<br/>
+    <select type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="birthControl">
+        <option value="0" selected>未节育</option>
+        <option value="1">已结育</option>
+    </select>:是否节育<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="location" placeholder="请输入location"
+           value=""/>:所在地<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="vaccineTime"
+           placeholder="请输入上次vaccineTime" value=""/>:上次疫苗时间<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="petTell" placeholder="请输入petTell"
+           value=""/>:小乖想说<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="comment" placeholder="请输入comment"
+           value=""/>:备注<br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="browseCount" placeholder="请输入browseCount"
+           value=""/>:浏览次数<br/>
+    <select type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="petState">
+        <option value="1" selected>启用</option>
+        <option value="2">停用</option>
+        <option value="0">删除</option>
+    </select>:petState<br/><br/>
+    <!-- <input type="file"  id="headPortraits"/> -->
+    <form id="petPhotoForm" action="http://localhost:8080/littlePet/updatePetPhotoInfo" method="post"
+          enctype="multipart/form-data" target="_self">
+        <input id="fileTarget" name="myfiles" type="file" style="width:50%;margin-left:10%;margin-top:20px;"><span>:headPortraits</span><br/>
+        <a><img id="imgTarget" src=""></a><br/><br/><br/>
+        <input type="hidden" id="photoPetId" name="photoPetId">
+    </form>
+    <input style="margin-left:10%" type="button" id="btnAdd" value="添加宠物信息" onclick="doAdd()"/>
+    <input style="margin-left:20px" type="button" id="btnUpdate" value="更新宠物部分信息" onclick="doUpdatePart()"/><br/><br/>
+    <input style="margin-left:10%" type="button" id="btnDel" value="删除宠物信息" onclick="doDel()"/>
+    <input style="margin-left:20px" type="button" id="btnUpdate" value="更新宠物全部信息" onclick="doUpdateAll()"/>
+    <input style="margin-left:20px" type="button" id="btnAddPhoto" value="添加图片" onclick="addPhoto()"/>
+</div>
+
+
+<div></div>
+<div></div>
+
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        getFileImg($("#fileTarget"), $("#imgTarget"));
+    })
+    function doAdd() {
+        getPetInfoByCondition("add");
+    }
+    function doUpdatePart() {
+        getPetInfoByCondition("updatePart");
+    }
+    function doUpdateAll() {
+        getPetInfoByCondition("updateAll");
+    }
+    function doDel() {
+        getPetInfoByCondition("del");
+    }
+    function addPhoto() {
+        $("#photoPetId").val($("#petId").val());
+        var petId = $("#photoPetId").val();
+        var photo = document.getElementById("imgTarget").src;
+        if (petId == "" || photo == "") {
+            alert("请输入petId，请选择宠物照片");
+            return;
+        }
+        $("#petPhotoForm").submit();
+
+    }
+    function doQuery() {
+        var condition = $("#condition").val();
+        tbDataOld();
+        if (condition == "" || condition == '' || condition == "null") {
+            return;
+        }
+        var url = baseHost + "getPetInfoByStrLike?condition=" + condition;
+        $.post(url, function (res) {
+                    if (res.code == "10000" || res.msg == "ok" || res.data == "true") {
+                        if (res.data.length == 0) {
+                            alert("没有查询到相关信息,请更换条件重新查询");
+                            return;
+                        }
+                        var strTB = "";
+                        for (var i = 0; i < res.data.length; i++) {
+                            var item = res.data[i];
+                            strTB += "<tr border='1'>" +
+                                    "<td style='width:52px' onclick='getPetId(" + item.petId + ")'>" + item.petId + "</td>" +
+                                    "<td style='width:52px'>" + item.name + "</td>" +
+                                    "<td style='width:52px'>" + item.strSex + "</td>" +
+                                    "<td style='width:52px'>" + item.strBirthDay + "</td>" +
+                                    "<td style='width:52px'>" + item.breed + "</td>" +
+                                    "<td style='width:52px'>" + item.weight + " kg</td>" +
+                                    "<td style='width:52px'>" + item.strBirthControl + "</td>" +
+                                    "<td style='width:52px'>" + item.location + "</td>" +
+                                    "<td style='width:52px'>" + item.strVaccineTime + "</td>" +
+                                    "<td style='width:52px'>" + item.comment + "</td>";
+                            if (item.petState == 0) {
+                                strTB += "<td style='width:52px'>删除</td></tr>";
+                            } else if (item.petState == 1) {
+                                strTB += "<td style='width:52px'>启用</td></tr>";
+                            } else {
+                                strTB += "<td style='width:52px'>停用</td></tr>";
+                            }
+                        }
+                        document.getElementById("petInfoTB").innerHTML += strTB;
+                    } else {
+                        alert("没有查询到相关信息,请更换条件重新查询");
+                    }
+                }, 'JSON')
+                .error(function (res) {
+                    alert("出错啦！" + res.msg);
+                });
+    }
+
+    function tbDataOld() {
+        var strTB = "<tr border='1'><td style='width:52px'>petId</td><td style='width:52px'>name</td>" +
+                "<td style='width:52px'>sex</td><td style='width:52px'>birthday</td><td style='width:52px'>breed</td>" +
+                "<td style='width:52px'>weight</td><td style='width:52px'>birthControl</td><td style='width:52px'>location</td><td style='width:52px'>vaccineTime</td><td style='width:52px'>comment</td>" +
+                "<td style='width:52px'>petState</td></tr>";
+        document.getElementById("petInfoTB").innerHTML = strTB;
+    }
+    function getPetId(value) {
+        $("#petId").val(value);
+    }
+    function getPetInfoByCondition(state) {
+        var petId = $("#petId").val();
+        var name = $("#name").val();
+        var sex = $("#sex").val();
+        var birthday = $("#birthday").val();
+        var breed = $("#breed").val();
+        var weight = $("#weight").val();
+        var birthControl = $("#birthControl").val();
+        var location = $("#location").val();
+        var vaccineTime = $("#vaccineTime").val();
+        var petTell = $("#petTell").val();
+        var comment = $("#comment").val();
+        var headPortraits = $("#headPortraits").val();
+        var browseCount = $("#browseCount").val();
+        var petState = $("#petState").val();
+
+        var headPhoto = $("#headPhoto").val();
+        if (state == "add") {
+            var url = baseHost + "littlePet/addPet?" +
+                    "petId=" + petId +
+                    "&name=" + name +
+                    "&sex=" + sex +
+                    "&birthday=" + birthday +
+                    "&breed=" + breed +
+                    "&weight=" + weight +
+                    "&birthControl=" + birthControl +
+                    "&location=" + location +
+                    "&vaccineTime=" + vaccineTime +
+                    "&petTell=" + petTell +
+                    "&comment=" + comment +
+                    "&headPortraits=" + headPortraits +
+                    "&browseCount=" + browseCount +
+                    "&petState=" + petState;
+        }
+        if (state == "updatePart") {
+            var url = baseHost + "littlePet/updatePetPartInfo?" +
+                    "petId=" + petId +
+                    "&name=" + name +
+                    "&sex=" + sex +
+                    "&birthday=" + birthday +
+                    "&breed=" + breed +
+                    "&weight=" + weight +
+                    "&birthContro=" + birthControl +
+                    "&location=" + location +
+                    "&vaccineTime=" + vaccineTime +
+                    "&petTell=" + petTell +
+                    "&comment=" + comment +
+                    "&headPortraits=" + headPortraits +
+                    "&browseCount=" + browseCount +
+                    "&petState=" + petState;
+        }
+        if (state == "updateAll") {
+            var url = baseHost + "littlePet/updatePetAllInfo?" +
+                    "petId=" + petId +
+                    "&name=" + name +
+                    "&sex=" + sex +
+                    "&birthday=" + birthday +
+                    "&breed=" + breed +
+                    "&weight=" + weight +
+                    "&birthContro=" + birthControl +
+                    "&location=" + location +
+                    "&vaccineTime=" + vaccineTime +
+                    "&petTell=" + petTell +
+                    "&comment=" + comment +
+                    "&headPortraits=" + headPortraits +
+                    "&browseCount=" + browseCount +
+                    "&petState=" + petState;
+        }
+        if (state == "del") {
+            var url = baseHost + "littlePet/delPet?" +
+                    "petId=" + petId;
+        }
+        $.post(url, function (res) {
+                    if (res.code == "10000" || res.msg == "ok" || res.data == "true") {
+                        alert("成功啦");
+                    }
+                }, 'JSON')
+                .error(function (res) {
+                    alert("出错啦！" + res.msg);
+                });
+    }
+
+    var getObjectURL = function (file) {
+        var url = "";
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    };
+
+    var getFileImg = function (fileTarget, imgTarget) {
+        fileTarget.change(function (e) {
+            var fileObj = e.target.value;
+            if (this.files != null)
+                fileObj = this.files[0];
+            var objUrl = getObjectURL(fileObj);
+            if (objUrl != null && objUrl != "") {
+                imgTarget.attr("src", objUrl);
+            }
+        });
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cdg-common:war">
+    <output-path>$PROJECT_DIR$/cdg-common/target</output-path>
+    <root id="archive" name="cdg-common.war">
+      <element id="artifact" artifact-name="cdg-common:war exploded" />
+    </root>
+  </artifact>
+</component>

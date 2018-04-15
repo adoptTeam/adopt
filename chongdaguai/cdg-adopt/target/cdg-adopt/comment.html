@@ -1,0 +1,80 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--禁止缩放-->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <!--全屏显示-->
+    <meta content="telephone=no" name="format-detection" />
+    <!--告诉设备忽略将页面中的数字识别为电话号码-->
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <!-- 隐藏状态栏-->
+    <link href="css/baes.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <title>宠小乖</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common/common.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/user/myCollection.js"></script>
+</head>
+
+<body style="background-color:#fff;">
+<!--<header>
+	<div class="header">
+      <div class="header_fb"><a id="goBack" href="" class="fb_1"><img src="images/jt_ccc.png">返回</a><a id="closeBtn" href="" class="fb_2">关闭</a>宠小乖<a href="#" class="fb_3">···</a></div>
+    </div>
+</header>-->
+<section>
+	<div class="fb_box">
+    	<textarea id="commentContent" placeholder="写评论"></textarea>
+    </div>
+    <div class="fb_btn">
+    	<input type="button" class="btn" value="发布"  onclick="addDynamicContent()">
+    </div>
+</section>
+<footer id="footer"></footer>
+
+<script src="js/swiper.min.js"></script>
+<script src="js/common/common.js"></script>
+<script type="text/javascript">
+    //底部信息
+    footer();
+    var token = getToken();
+    var petId= location.search.substring(1).split("=")[1];
+
+    $(function () {
+        setBackUrl();
+    })
+
+    var setBackUrl = function(){
+        $("#goBack").attr("href","adoptPetInfo.html?petId="+petId);
+        $("#closeBtn").attr("href","adoptPetInfo.html?petId="+petId);
+    }
+
+    var addDynamicContent=function(){
+        var content=$("#commentContent").val();
+        if(content==""){
+            alert("请输入评论内容！");
+            return;
+        }
+        $.ajax({
+            url:baseHost+'littlePet/addComment',
+            headers:{token:token},
+            data:{"petId":petId,"commentContent":content},
+            dataType:"json",
+            success:function(resp){
+                if(resp.data!=null && resp.data!="" && resp.data){
+                    window.location.href ="adoptPetInfo.html?petId="+petId;
+                }else{
+                    alert("网络延迟，请稍后重试");
+                }
+            },
+            error:function(){
+                alert("调用出错");
+            }
+        })
+    }
+</script>
+</body>
+</html>

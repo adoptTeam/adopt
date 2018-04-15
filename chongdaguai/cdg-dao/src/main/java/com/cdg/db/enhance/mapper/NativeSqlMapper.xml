@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdg.db.enhance.dao.NativeSqlMapper">
+
+    <resultMap id="LogisticsBaseResultMap" type="com.cdg.db.system.model.AdoptLogisticsInfo">
+        <id column="logistics_id" jdbcType="BIGINT" property="logisticsId"/>
+        <result column="adopt_id" jdbcType="BIGINT" property="adoptId"/>
+        <result column="logistics_content" jdbcType="VARCHAR" property="logisticsContent"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="PetBaseResultMap" type="com.cdg.db.pet.model.AdoptLittlePet">
+        <id column="pet_id" jdbcType="BIGINT" property="petId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="birthday" jdbcType="BIGINT" property="birthday"/>
+        <result column="breed" jdbcType="VARCHAR" property="breed"/>
+        <result column="weight" jdbcType="INTEGER" property="weight"/>
+        <result column="birth_control" jdbcType="TINYINT" property="birthControl"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="vaccine_time" jdbcType="BIGINT" property="vaccineTime"/>
+        <result column="pet_tell" jdbcType="VARCHAR" property="petTell"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+        <result column="head_portraits" jdbcType="VARCHAR" property="headPortraits"/>
+        <result column="browse_count" jdbcType="INTEGER" property="browseCount"/>
+        <result column="pet_state" jdbcType="TINYINT" property="petState"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="AddressBaseResultMap" type="com.cdg.db.user.model.AdoptUserAddress">
+        <id column="user_address_id" jdbcType="BIGINT" property="userAddressId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="consignee_name" jdbcType="VARCHAR" property="consigneeName"/>
+        <result column="consignee_phone" jdbcType="VARCHAR" property="consigneePhone"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="areas" jdbcType="VARCHAR" property="areas"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="address_state" jdbcType="TINYINT" property="addressState"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="AdoptBaseResultMap" type="com.cdg.db.user.model.AdoptUserAdopt">
+        <id column="adopt_id" jdbcType="BIGINT" property="adoptId"/>
+        <result column="user_Id" jdbcType="BIGINT" property="userId"/>
+        <result column="pet_id" jdbcType="BIGINT" property="petId"/>
+        <result column="address_id" jdbcType="BIGINT" property="addressId"/>
+        <result column="cash_pledge" jdbcType="INTEGER" property="cashPledge"/>
+        <result column="adopt_state" jdbcType="TINYINT" property="adoptState"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+    </resultMap>
+
+    <select id="execReadSql" parameterType="String" resultType="java.util.HashMap">
+		${value}
+	</select>
+
+    <update id="execWriteSql" parameterType="String">
+		${value}
+	</update>
+
+    <select id="countBySql" parameterType="String" resultType="java.lang.Integer">
+        ${value}
+    </select>
+
+
+    <select id="selectPetByUserId" parameterType="java.lang.Long" resultMap="PetBaseResultMap">
+		select
+		pet.*
+		from adopt_user_adopt userAdopt ,adopt_little_ped pet
+		where userAdopt.pet_id = pet.pet_id
+		and userAdopt.user_id =  #{userId,jdbcType=BIGINT}
+		and userAdopt.adopt_state != 70
+	</select>
+
+    <select id="selectAddressByUserIdAndState" parameterType="java.util.Map" resultMap="AddressBaseResultMap">
+		select
+		*
+		from adopt_user_address
+		where user_id= #{userId,jdbcType=BIGINT}
+		and (address_state =  #{state1,jdbcType=TINYINT} or address_state =  #{state2,jdbcType=TINYINT})
+	</select>
+
+    <select id="selectLogisticsByUserId" parameterType="java.lang.Long" resultMap="LogisticsBaseResultMap">
+		select
+		logistics.*
+		from adopt_user_adopt userAdopt ,adopt_logistics_info logistics
+		where userAdopt.adopt_id = logistics.adopt_id
+		and userAdopt.user_id =  #{userId,jdbcType=BIGINT}
+		and userAdopt.adopt_state != 70
+		order by logistics.create_time desc
+	</select>
+
+    <select id="selectUserAddressByUserId" parameterType="java.lang.Long" resultMap="AddressBaseResultMap">
+		select
+		address.*
+		from adopt_user_adopt userAdopt ,adopt_user_address address
+		where userAdopt.address_id = address.user_address_id
+		and userAdopt.user_id =  #{userId,jdbcType=BIGINT}
+		and userAdopt.adopt_state !=70
+	</select>
+
+    <select id="selectAdoptByAdoptSearch" parameterType="com.cdg.db.enhance.model.AdoptSearch"
+            resultMap="AdoptBaseResultMap">
+        SELECT
+        distinct adopt.*
+        FROM
+        adopt_user_adopt adopt
+        left join adopt_logistics_info logistics on adopt.adopt_id = logistics.adopt_id
+        left join adopt_user_address address on adopt.adopt_id = logistics.adopt_id
+        left join adopt_user userInfo on userInfo.user_id = adopt.user_Id
+        <where>
+            <trim prefixOverrides="and">
+                <if test="addressName != null and addressName!=''.toString()">
+                    AND address.consignee_name LIKE #{addressName,jdbcType=VARCHAR}
+                </if>
+                <if test="addressPhone != null and addressPhone!=''.toString()">
+                    AND address.consignee_phone LIKE #{addressPhone,jdbcType=VARCHAR}
+                </if>
+                <if test="adoptState != null and adoptState!=''.toString()">
+                    AND adopt.adopt_state = ${adoptState}
+                </if>
+                <if test="nickname != null and nickname!=''.toString()">
+                    AND userInfo.nickname like #{nickname,jdbcType=VARCHAR}
+                </if>
+                <if test="realName != null and realName!=''.toString()">
+                    AND userInfo.real_name = #{realName,jdbcType=VARCHAR}
+                </if>
+            </trim>
+        </where>
+    </select>
+    
+    
+    <select id="getMyCollectionCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT
+            count(DISTINCT(record.pet_id))
+        FROM
+            adopt_record record,
+            adopt_little_ped pet
+        WHERE
+            record.pet_id = pet.pet_id
+        AND record.record_type = 1
+        AND record.user_id = #{userId}
+    </select>
+
+</mapper>

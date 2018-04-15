@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdg.db.pet.dao.AdoptCommentMapper">
+  <resultMap id="BaseResultMap" type="com.cdg.db.pet.model.AdoptComment">
+    <id column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="pet_id" jdbcType="BIGINT" property="petId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    comment_id, pet_id, user_id, user_nickname, comment_content, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.cdg.db.pet.model.AdoptCommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from adopt_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      limit #{page.begin} , #{page.size}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from adopt_comment
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from adopt_comment
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cdg.db.pet.model.AdoptCommentExample">
+    delete from adopt_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cdg.db.pet.model.AdoptComment">
+    <selectKey keyProperty="commentId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into adopt_comment (pet_id, user_id, user_nickname, 
+      comment_content, create_time, update_time
+      )
+    values (#{petId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userNickname,jdbcType=VARCHAR}, 
+      #{commentContent,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdg.db.pet.model.AdoptComment">
+    <selectKey keyProperty="commentId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into adopt_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="petId != null">
+        pet_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userNickname != null">
+        user_nickname,
+      </if>
+      <if test="commentContent != null">
+        comment_content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="petId != null">
+        #{petId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userNickname != null">
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cdg.db.pet.model.AdoptCommentExample" resultType="java.lang.Long">
+    select count(*) from adopt_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update adopt_comment
+    <set>
+      <if test="record.commentId != null">
+        comment_id = #{record.commentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.petId != null">
+        pet_id = #{record.petId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userNickname != null">
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentContent != null">
+        comment_content = #{record.commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update adopt_comment
+    set comment_id = #{record.commentId,jdbcType=BIGINT},
+      pet_id = #{record.petId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      comment_content = #{record.commentContent,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdg.db.pet.model.AdoptComment">
+    update adopt_comment
+    <set>
+      <if test="petId != null">
+        pet_id = #{petId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userNickname != null">
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null">
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdg.db.pet.model.AdoptComment">
+    update adopt_comment
+    set pet_id = #{petId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update adopt_comment
+      <set>
+        <if test="item.petId!=null">
+          pet_id=#{item.petId,jdbcType=BIGINT},
+        </if>
+        <if test="item.userId!=null">
+          user_id=#{item.userId,jdbcType=BIGINT},
+        </if>
+        <if test="item.userNickname!=null">
+          user_nickname=#{item.userNickname,jdbcType=VARCHAR},
+        </if>
+        <if test="item.commentContent!=null">
+          comment_content=#{item.commentContent,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime!=null">
+          create_time=#{item.createTime,jdbcType=BIGINT},
+        </if>
+        <if test="item.updateTime!=null">
+          update_time=#{item.updateTime,jdbcType=BIGINT},
+        </if>
+      </set>
+      where 
+      comment_id = #{item.commentId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      insert into adopt_comment
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="item.commentId!=null">
+          comment_id,
+        </if>
+        <if test="item.petId!=null">
+          pet_id,
+        </if>
+        <if test="item.userId!=null">
+          user_id,
+        </if>
+        <if test="item.userNickname!=null">
+          user_nickname,
+        </if>
+        <if test="item.commentContent!=null">
+          comment_content,
+        </if>
+        <if test="item.createTime!=null">
+          create_time,
+        </if>
+        <if test="item.updateTime!=null">
+          update_time,
+        </if>
+      </trim>
+       values 
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.commentId!=null">
+          #{item.commentId,jdbcType=BIGINT},
+        </if>
+        <if test="item.petId!=null">
+          #{item.petId,jdbcType=BIGINT},
+        </if>
+        <if test="item.userId!=null">
+          #{item.userId,jdbcType=BIGINT},
+        </if>
+        <if test="item.userNickname!=null">
+          #{item.userNickname,jdbcType=VARCHAR},
+        </if>
+        <if test="item.commentContent!=null">
+          #{item.commentContent,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=BIGINT},
+        </if>
+        <if test="item.updateTime!=null">
+          #{item.updateTime,jdbcType=BIGINT},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into adopt_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      comment_id,pet_id,
+      user_id,user_nickname,
+      comment_content,create_time,
+      update_time,
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.commentId,jdbcType=BIGINT},#{item.petId,jdbcType=BIGINT},
+        #{item.userId,jdbcType=BIGINT},#{item.userNickname,jdbcType=VARCHAR},
+        #{item.commentContent,jdbcType=VARCHAR},#{item.createTime,jdbcType=BIGINT},
+        #{item.updateTime,jdbcType=BIGINT},
+      </trim>
+    </foreach>
+  </insert>
+
+</mapper>

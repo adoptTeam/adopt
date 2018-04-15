@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!--禁止缩放-->
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <!--全屏显示-->
+    <meta content="telephone=no" name="format-detection"/>
+    <!--告诉设备忽略将页面中的数字识别为电话号码-->
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <!-- 隐藏状态栏-->
+    <link href="css/baes.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <title>宠小乖</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common/date.js"></script>
+    <script src="js/common/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="layer/skin/default/layer.css"/>
+    <script type="text/javascript" src="layer/layer.js" ></script>
+</head>
+
+<body style="background-color:#fff;">
+<section>
+    <div id="adaoptPay"　class="payt">
+        <div class="fk_bg">
+            <div class="payment_1">
+                <i><img src="images/ic_7.png"></i><span><b>体验结束</b>小乖已同您度过了12天，谢谢您的照顾...</span>
+            </div>
+        </div>
+        <!--<div class="adopt_2" style="margin-bottom:0;">
+            <div class="pic"><img src="images/adopt_img.jpg"></div>
+            <div class="pac">
+                <h3>中华田园犬找个有爱心的主人</h3>
+                <h4><span>品种:中华田园犬</span><span>性别:雄性</span><span class="cur">年龄:3岁</span></h4>
+                <p>好主人快来带我回家,小宝宝两个月大很健康很可爱,长的也很有特点...</p>
+            </div>
+        </div>
+        <div class="payt_text">
+            <h3><span>备注：</span><i>轻松一点狗粮，谢谢！</i></h3>
+            <p><span>承诺金退还中</span><i class="cur">300.00元</i></p>
+        </div>
+        <div class="payt_xx">
+            <h3>配送信息</h3>
+            <ul>
+                <li>
+                    <div class="psc"><span>2017-09-26 12:20:26</span><i>小乖骑士正在把“中华田园犬”送到您的手上</i></div>
+                </li>
+                <li>
+                    <div class="psc"><span>2017-09-26 12:20:26</span><i>小乖骑士正在把“中华田园犬”送到您的手上</i></div>
+                </li>
+                <li>
+                    <div class="psc"><span>2017-09-26 12:20:26</span><i>小乖骑士已接单</i></div>
+                </li>
+            </ul>
+        </div>-->
+    </div>
+</section>
+<footer id="footer"></footer>
+<script>
+    $(function () {
+        //底部信息
+        footer();
+        var url = baseHost + "user/getAdoptInfoByUserId";
+        //初始化页面信息
+        $.ajax({
+            url:url,
+            headers:{"token":getToken()},
+            dataType:"json",
+            success:function(res){
+                if (res.code == "10000" || res.msg == "ok" || res.data == "true") {
+                    var userInfo = res.data.user;
+                    var petInfo = res.data.adoptLittlePet;
+                    var adoptLogisticsInfo = res.data.adoptLogisticsInfos;
+                    var age = "";
+                    if(petInfo.birthday != null){
+                        age = parseInt(petInfo.birthday/12) + "岁" + petInfo.birthday%12 + "个月";
+                    }
+                    var petSex = "男";
+                    if (petInfo.sex == 0) {
+                        petSex = "女";
+                    }
+
+                    var petHtml = "<div class='adopt_2' style='margin-bottom:0;'>"
+                        + "<div class='pic'><img src='" + petInfo.headPortraits + "'></div>"
+                        + "<div class='pac'> <h3>" + petInfo.name + "</h3>"
+                        + "<h4><span>品种:" + petInfo.breed + "</span><span>性别:" + petSex + "" +
+                        "</span><span class='cur'>年龄:" + age + "</span></h4>"
+                        + "<p>" + petInfo.petTell + "</p> </div> </div>"
+                        + "<div class='payt_text'> <h3><span>备注：</span><i>" + res.data.commentContent + "</i></h3>"
+                        + "<p><span>已缴承诺金</span><i>300.00元</i></p> </div>"
+
+                    var logisticsHtml = "<div class='payt_xx' style='border-top:solid 1px #e9e9e9;'> <h3>配送信息</h3> <ul>"
+                    if (adoptLogisticsInfo != null) {
+                        for (var i = 0; i < adoptLogisticsInfo.length; i++) {
+                            logisticsHtml = logisticsHtml + "<li> <div class='psc''><span>" + timestampToTime(adoptLogisticsInfo[i].createTime)
+                                + "</span><i> " + adoptLogisticsInfo[i].logisticsContent + "</i></div> </li>"
+                        }
+                    }
+                    logisticsHtml = logisticsHtml + "</ul> </div>";
+
+
+                    document.getElementById("adaoptPay").innerHTML += petHtml + logisticsHtml;
+                } else {
+                    layer.alert("没有查询到相关信息");
+                }
+            },
+            error:function(){
+                layer.alert("出错啦！" + res.msg);
+            }
+        })
+    })
+</script>
+</body>
+</html>

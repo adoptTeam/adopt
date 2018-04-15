@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pet</title>
+</head>
+<body>
+<div style="width:40%">
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="logisticsId" placeholder="请输入logisticsId"
+           placeholder="" value=""/>:logisticsId(物流id) <br/>
+    <input type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="adoptIdStr" placeholder="请输入adoptId"
+           placeholder="" value=""/>:adoptId(订单id) <br/>
+    <select type="text" style="width:50%;margin-left:10%;margin-top:20px;" id="logisticsContent">
+        <option value="1" selected>小乖正在准备发送</option>
+        <option value="0">小乖已在途中</option>
+        <option value="0">小乖已到达</option>
+        <option value="0">小乖已返还</option>
+    </select>:logisticsContent（物流信息）<br/>
+
+    <input style="margin-left:10%" type="button" id="btnAdd" value="添加物流信息" onclick="doAdd()"/>
+    <input style="margin-left:20px" type="button" id="btnUpdate" value="更新物流信息" onclick="doUpdatePart()"/><br/><br/>
+    <input style="margin-left:10%" type="button" id="btnDel" value="删除宠物信息" onclick="doDel()"/>
+</div>
+
+<div style="position:absolute;left:45%;top:20px" >
+    adoptId(订单id)：<input type="text" id="adoptId" style="width:30%;margin-right:20px"><br/>
+    logisticsContent(物流信息)：<input type="text" id="content" style="width:30%;margin-right:20px"><br/>
+    <input type="button" id="btnQuery" value="查询" onclick="doQuery()"><br/>
+
+    <table id="petInfoTB" border="1" style="TABLE-LAYOUT: fixed">
+        <tr border="1">
+            <td style="width:30px">logisticsId(物流id)</td>
+            <td style="width:30px">adoptId(订单id)</td>
+            <td style="width:30px">logisticsContent(物流信息)</td>
+            <td style="width:300px">createTime(创建时间)</td>
+            <td style="width:300px">updateTime(修改时间)</td>
+        </tr>
+    </table>
+</div>
+
+<div></div>
+<div></div>
+
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript">
+    var host = "http://adopt.chongxiaoguai.com/adopt/logistics/";
+    //var host = "http://localhost:8080/user/";
+    function doQuery() {
+        var adoptId = $("#adoptId").val();
+        var content = $("#content").val();
+        tbDataOld();
+
+        var url = host + "selectByAdoptIdAndContent?adoptId= "+ adoptId + "&content=" + content;
+        $.post(url, function (res) {
+            if (res.code == "10000" || res.msg == "ok" || res.data == "true") {
+                var strTB = "";
+                for (var i = 0; i < res.data.length; i++) {
+                    var item = res.data[i];
+                    strTB += "<tr border='1'>" +
+                        "<td style='width:30px'>" + item.logisticsId + "</td>" +
+                        "<td style='width:30px'>" + item.adoptId + "</td>" +
+                        "<td style='width:30px'>" + item.logisticsContent + "</td>" +
+                        "<td style='width:30px'>" + timestampToTime(item.createTime) + "</td>" +
+                        "<td style='width:30px'>" + timestampToTime(item.updateTime) + "</td>";
+                }
+                document.getElementById("petInfoTB").innerHTML += strTB;
+            } else {
+                alert("没有查询到相关信息,请更换条件重新查询");
+            }
+        }, 'JSON')
+            .error(function (res) {
+                alert("出错啦！" + res.msg);
+            });
+    }
+
+    function tbDataOld() {
+        var strTB = "<tr border='1'><td style='width:30px'>logisticsId(物流id)</td><td style='width:30px'>adoptId(订单id)</td>" +
+            "<td style='width:30px'>logisticsContent(物流信息)</td>" +
+            "<td style='width:290px' >createTime(创建时间)</td>" +
+            "<td style='width:290px'>updateTime(修改时间)</td></tr>";
+        document.getElementById("petInfoTB").innerHTML = strTB;
+    }
+    function doAdd() {
+        var adoptId = $("#adoptIdStr").val();
+        var content = $("#logisticsContent option:selected").text();
+        if(adoptId == null || adoptId == ''){
+            alert("请输入adoptId");
+            return ;
+        }
+        if(content == null || content == ''){
+            alert("请输入物流信息");
+            return ;
+        }
+
+        var url = host + "insert?adoptId=" + adoptId  +"&content=" + content;
+        $.post(url, function (res) {
+            if (res.code == "10000" || res.msg == "ok") {
+                if(res.data == true){
+                    alert("保存成功");
+                }else{
+                    alert("保存失败");
+                }
+            }
+        }, 'JSON')
+            .error(function (res) {
+                alert("出错啦！" + res.msg);
+            });
+    }
+
+    function doUpdatePart() {
+        var logisticsId = $("#logisticsId").val();
+        var content = $("#logisticsContent option:selected").text();
+        if(logisticsId == null || logisticsId == ''){
+            alert("请输入logisticsId");
+            return ;
+        }
+
+        var url = host + "updateContentById?logisticsId=" + logisticsId  +"&content=" + content;
+        $.post(url, function (res) {
+            if (res.code == "10000" || res.msg == "ok") {
+                if(res.data == true){
+                    alert("修改成功");
+                }else{
+                    alert("修改失败");
+                }
+            }
+        }, 'JSON')
+            .error(function (res) {
+                alert("出错啦！" + res.msg);
+            });
+    }
+
+    function doDel() {
+        var logisticsId = $("#logisticsId").val();
+        var content = $("#logisticsContent option:selected").text();
+        if(logisticsId == null || logisticsId == ''){
+            alert("请输入logisticsId");
+            return ;
+        }
+
+        var url = host + "deleteByLogisticsId?logisticsId=" + logisticsId  +"&content=" + content;
+        $.post(url, function (res) {
+            if (res.code == "10000" || res.msg == "ok") {
+                if(res.data == true){
+                    alert("删除成功");
+                }else{
+                    alert("=删除失败");
+                }
+            }
+        }, 'JSON')
+            .error(function (res) {
+                alert("出错啦！" + res.msg);
+            });
+    }
+
+    //把时间戳转换为yyyyMMdd
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp);
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y + M + D + h + m + s ;
+    }
+</script>
+</body>
+</html>

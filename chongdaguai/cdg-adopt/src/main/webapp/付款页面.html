@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--禁止缩放-->
+<meta content="yes" name="apple-mobile-web-app-capable" />
+    <!--全屏显示-->
+<meta content="telephone=no" name="format-detection" />
+    <!--告诉设备忽略将页面中的数字识别为电话号码-->
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <!-- 隐藏状态栏-->
+<link href="css/baes.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<title>宠小乖</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+</head>
+
+<body>
+<section>
+<div class="payment">
+	<div class="fk_bg">
+		<div class="payment_1">
+    	<i><img src="images/ic_7.png"></i><span><b id="countdown_time">00:14:58</b>请您在规定时间内完成付款，谢谢！</span>
+    </div>
+   		<div class="payment_2">
+    	<span>需付款金额：</span><i>￥ <b>300.00</b> 元</i>
+    </div>
+    </div>
+    <div class="payment_3">
+    	<h3>支付方式:</h3>
+        <ul>
+        	<li><i><img src="images/wx_icon.png"></i><span>微信支付</span><em class="check checked"><input type="checkbox"></em></li>
+        </ul>
+    </div>
+</div>
+<div class="details_btn">
+	<input type="button" class="btn" value="立即付款">
+</div>	
+</section>
+ <script>
+     $(function(){
+         $(".payment_3 ul li").click(function(){
+             $(this).find(".check").addClass("checked");
+         })
+         //设置时间倒计时
+         setCountDown_time();
+     })
+     /*时间倒计时*/
+     var sec = 60,min = 14;
+     var format = function(str) {
+         if(parseInt(str) < 10) {
+             return "0" + str;
+         }
+         return str;
+     };
+     function setCountDown_time(){
+         var idt = window.setInterval("ls();", 1000);
+     }
+     function ls() {
+         sec--;
+         if(sec == 0) {
+             min--;
+             sec = 59;
+         }
+         document.getElementById("countdown_time").innerHTML ="00:" +format(min) + ":" + format(sec);
+         if(parseInt(min) == 0 && parseInt(sec) == 0) {
+             window.clearInterval(idt);
+             alert('您未在规定时间内完成付款，请重新支付！');
+         }
+     }
+ </script>
+</body>
+</html>
