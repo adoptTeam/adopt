@@ -17,12 +17,12 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
-      <profile default="false" name="Annotation profile for cdg-common" enabled="true">
+      <profile default="false" name="Annotation profile for cdg-dao" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="cdg-common" />
+        <module name="cdg-dao" />
       </profile>
       <profile default="false" name="Annotation profile for cdg-adopt" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -31,12 +31,12 @@
         <processorPath useClasspath="true" />
         <module name="cdg-adopt" />
       </profile>
-      <profile default="false" name="Annotation profile for cdg-dao" enabled="true">
+      <profile default="false" name="Annotation profile for cdg-common" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="cdg-dao" />
+        <module name="cdg-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
