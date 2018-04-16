@@ -61,7 +61,13 @@
         <entry file="file://$PROJECT_DIR$/cdg-adopt/src/main/java/com/adopt/common/service/CommonService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
+<<<<<<< HEAD
               <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+=======
+              <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+            <state relative-caret-position="437">
+              <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+>>>>>>> d15259952afeed31b204e50f52c1909ca38b1b8f
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -313,12 +319,21 @@
       <updated>1523782506638</updated>
       <workItem from="1523782508775" duration="101000" />
       <workItem from="1523882219817" duration="543000" />
+<<<<<<< HEAD
       <workItem from="1523883685953" duration="58000" />
+=======
+      <workItem from="1523883685953" duration="278000" />
+>>>>>>> d15259952afeed31b204e50f52c1909ca38b1b8f
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="702000" />
+=======
+    <option name="totallyTimeSpent" value="922000" />
+    <option name="totallyTimeSpent" value="644000" />
+>>>>>>> d15259952afeed31b204e50f52c1909ca38b1b8f
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="986" extended-state="6" />
@@ -436,7 +451,13 @@
     <entry file="file://$PROJECT_DIR$/cdg-adopt/src/main/java/com/adopt/common/service/CommonService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
+<<<<<<< HEAD
           <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+=======
+          <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+        <state relative-caret-position="437">
+          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+>>>>>>> d15259952afeed31b204e50f52c1909ca38b1b8f
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
