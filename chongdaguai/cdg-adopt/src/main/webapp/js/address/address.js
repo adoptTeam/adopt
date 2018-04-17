@@ -1,6 +1,3 @@
-/**
- * Created by zhenghao on 2018/2/1.
- */
 //var host = "http://localhost:8080/system/"
 
 var token = localStorage.getItem("accessToken");

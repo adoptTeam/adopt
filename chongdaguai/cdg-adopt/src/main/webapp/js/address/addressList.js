@@ -1,6 +1,3 @@
-/**
- * Created by zhenghao on 2018/2/3.
- */
 var app = angular.module('myApp', []);
 
 //var token = localStorage.getItem("accessToken");

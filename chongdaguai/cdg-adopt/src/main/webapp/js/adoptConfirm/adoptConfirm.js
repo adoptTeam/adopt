@@ -1,10 +1,3 @@
-/**
- * Created by zhenghao on 2018/2/4.
- */
-/**
- * Created by zhenghao on 2018/2/3.
- */
-
 var app = angular.module('myApp', []);
 var token = getToken();
 app.controller("ctrl", function ($scope, $http) {

@@ -1,7 +1,3 @@
-/**
- * Created by zhenghao on 2018/2/3.
- */
-
 var app = angular.module('myApp', []);
 
 app.controller("ctrl", function ($scope, $http, $location) {
@@ -26,9 +22,6 @@ app.controller("ctrl", function ($scope, $http, $location) {
             }else {
                 $scope.petList = response.data.rows;
             }
-
-
-
 
         }).error(function () {
 

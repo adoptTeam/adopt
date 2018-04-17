@@ -1,4 +1,3 @@
-
 //把时间戳转换为yyyyMMdd
 function timestampToTime(timestamp) {
     var date = new Date(timestamp);

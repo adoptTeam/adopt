@@ -1,6 +1,3 @@
-/**
- * Created by whp on 2018/2/8.
- */
 $(function () {
     var url=baseHost+"weixin/getPersonCashInfo"
     $.ajax({

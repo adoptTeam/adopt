@@ -1,6 +1,3 @@
-/**
- * Created by zhenghao on 2018/2/3.
- */
 // var baseHost = "http://adopt.chongxiaoguai.com/adopt/";
 var baseHost = "http://localhost:8080/";
 //var baseHost = "http://adopt.chongxiaoguai.com/adopt/";

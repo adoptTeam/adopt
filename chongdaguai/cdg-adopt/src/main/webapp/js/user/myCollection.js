@@ -1,6 +1,3 @@
-/**
- * Created by zhenghao on 2018/2/6.
- */
 var app = angular.module('myApp', []);
 
 app.controller("ctrl", function ($scope, $http) {
