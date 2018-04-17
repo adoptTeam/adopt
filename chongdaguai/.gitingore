@@ -19,6 +19,12 @@ hs_err_pid*
 # IntelliJ IDEA files
 .idea/
 *.iml
+ chongdaguai/.idea/
+        chongdaguai/cdg-adopt/cdg-adopt.iml
+        chongdaguai/cdg-common/cdg-common.iml
+        chongdaguai/cdg-dao/cdg-dao.iml
+        chongdaguai/cdg.parent.iml
+
 
 # Eclipse settings files
 .project
