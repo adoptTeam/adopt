@@ -1,4 +1,4 @@
-package main.java.com.adopt.littlepet.controller;
+package com.adopt.littlepet.controller;
 
 public class LittlePetController {
 }

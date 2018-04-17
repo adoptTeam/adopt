@@ -1,4 +1,4 @@
-package main.java.com.adopt.littlepet.service;
+package com.adopt.littlepet.service;
 
 public class LittlePetService {
 }
