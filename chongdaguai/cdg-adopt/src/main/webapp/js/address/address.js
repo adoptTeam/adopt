@@ -28,7 +28,7 @@ $(document).ready(function () {
             });
         }
     });
-
+ 
     //点击编辑进入此页面
     var addressId = location.search.substring(1).split("=")[1];
     if (addressId != null && addressId != 'addFlag') {
