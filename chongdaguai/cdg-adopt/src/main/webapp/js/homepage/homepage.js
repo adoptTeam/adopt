@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var app = angular.module('myApp', []);
 
 app.controller("ctrl", function ($scope, $http, $location) {
@@ -54,9 +53,6 @@ function func1() {
 }
 
 
-
-
-=======
 /**
  * Created by zhenghao on 2018/2/3.
  */
@@ -118,7 +114,3 @@ function func1() {
     $scope.loadPet();
 }
 
-
-
-
->>>>>>> 00ba704356d5d55ed4de9fd047119f07f6a0a180
