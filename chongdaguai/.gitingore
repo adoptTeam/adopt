@@ -34,16 +34,13 @@ nb-configuration.xml
 *.iml
 
 ## Directory-based project format:
-<<<<<<< HEAD
-.idea/
-=======
-chongdaguai/.idea/
-        chongdaguai/cdg-adopt/cdg-adopt.iml
-        chongdaguai/cdg-common/cdg-common.iml
-        chongdaguai/cdg-dao/cdg-dao.iml
-        chongdaguai/cdg.parent.iml
+.idea
+chongdaguai/.idea
+chongdaguai/cdg-adopt/cdg-adopt.iml
+chongdaguai/cdg-common/cdg-common.iml
+chongdaguai/cdg-dao/cdg-dao.iml
+chongdaguai/cdg.parent.iml
 
->>>>>>> 78cd0cfaf46b8ee264744007f7ef59405ff73998
 # if you remove the above rule, at least ignore the follwing:
 
 # User-specific stuff:
