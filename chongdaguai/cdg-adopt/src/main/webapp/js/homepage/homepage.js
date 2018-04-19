@@ -1,7 +1,7 @@
 var app = angular.module('myApp', []);
 
 app.controller("ctrl", function ($scope, $http, $location) {
-
+ 
     $scope.offset = 0;
     $scope.$watch('$viewContentLoaded', function () {
         $scope.loadPet();
