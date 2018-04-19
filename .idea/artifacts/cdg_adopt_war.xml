@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cdg-adopt:war">
+    <output-path>$PROJECT_DIR$/chongdaguai/cdg-adopt/target</output-path>
+    <root id="archive" name="cdg-adopt.war">
+      <element id="artifact" artifact-name="cdg-adopt:war exploded" />
+    </root>
+  </artifact>
+</component>
