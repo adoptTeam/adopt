@@ -43,8 +43,8 @@ import java.util.*;
 public class LittlePetController {
     @Autowired
     private LittlePetService littlePetService;
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private CommentService commentService;
     @Autowired
@@ -478,30 +478,30 @@ public class LittlePetController {
      * @param req
      * @param res
      */
-//    @RequestMapping(value = "/getAdoptionAgreementInfo", method = {RequestMethod.GET, RequestMethod.POST})
-//    @CrossOrigin
-//    @ApiOperation(value = "获取领养协议的三方信息", notes = "获取领养协议的三方信息", httpMethod = "POST")
-//    public void getAdoptionAgreementInfo(HttpServletRequest req, HttpServletResponse res) {
-//        String id = getFileValueFromHttpRequest(req, "petId");
-//        String redisToken = req.getHeader("token");
-//        AdoptUser user = commonService.getUserInfo(redisToken);
-//        if (user == null) {
-//            throw new ToUserException("无效token信息");
-//        }
-//        long uId = user.getUserId();
-//
-//        if (StringUtils.isEmpty(id) || StringUtils.isEmpty(String.valueOf(uId))) {
-//            ServletUtils.toJson(req, res);
-//        }
-//        Long petId = Long.valueOf(id);
-//        Long userId = Long.valueOf(uId);
-//        AdoptUser userInfo = userService.getUserInfoByUserId(userId);
-//        AdoptLittlePet pet = littlePetService.queryPetInfoByPetId(petId);
-//        Map<String, Object> map = new TreeMap<>();
-//        map.put("userInfo", userInfo);
-//        map.put("petInfo", pet);
-//        ServletUtils.toJson(map, req, res);
-//    }
+    @RequestMapping(value = "/getAdoptionAgreementInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    @CrossOrigin
+    @ApiOperation(value = "获取领养协议的三方信息", notes = "获取领养协议的三方信息", httpMethod = "POST")
+    public void getAdoptionAgreementInfo(HttpServletRequest req, HttpServletResponse res) {
+        String id = getFileValueFromHttpRequest(req, "petId");
+        String redisToken = req.getHeader("token");
+        AdoptUser user = commonService.getUserInfo(redisToken);
+        if (user == null) {
+            throw new ToUserException("无效token信息");
+        }
+        long uId = user.getUserId();
+
+        if (StringUtils.isEmpty(id) || StringUtils.isEmpty(String.valueOf(uId))) {
+            ServletUtils.toJson(req, res);
+        }
+        Long petId = Long.valueOf(id);
+        Long userId = Long.valueOf(uId);
+        AdoptUser userInfo = userService.getUserInfoByUserId(userId);
+        AdoptLittlePet pet = littlePetService.queryPetInfoByPetId(petId);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("userInfo", userInfo);
+        map.put("petInfo", pet);
+        ServletUtils.toJson(map, req, res);
+    }
     /**
      * 模糊查询小乖信息，模糊条件：petId\name\breed\sex\petState
      * @param req

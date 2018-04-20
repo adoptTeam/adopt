@@ -28,7 +28,7 @@ public class AdoptLogisticsInfoController {
      * @param req
      * @param res
      */
- /*   @RequestMapping(value = "/insert")
+    @RequestMapping(value = "/insert")
     @CrossOrigin
     public void insert(HttpServletRequest req, HttpServletResponse res) {
         String id = req.getParameter("adoptId");
@@ -42,7 +42,7 @@ public class AdoptLogisticsInfoController {
         }
         Boolean result = adoptLogisticsInfoService.insert(adoptLogisticsInfo);
         ServletUtils.toJson(result, req, res);
-    }*/
+    }
 
     /**
      * 根据id删除信息

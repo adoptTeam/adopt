@@ -24,40 +24,40 @@ public class AdoptLogisticsInfoService {
     private AdoptLogisticsInfoMapper adoptLogisticsInfoMapper;
     @Autowired
     private AdoptUserAdoptMapper adoptUserAdoptMapper;
-//    @Autowired
-//    private CashInfoService cashInfoService;
+    @Autowired
+    private CashInfoService cashInfoService;
 
     /**
      * 增加一条数据
      *
      * @param adoptLogisticsInfo
      */
-//    @Transactional
-//    public boolean insert(AdoptLogisticsInfo adoptLogisticsInfo) {
-//        try{
-//            AdoptUserAdoptExample adoptUserAdoptExample = new AdoptUserAdoptExample();
-//            adoptUserAdoptExample.createCriteria().andAdoptIdEqualTo(adoptLogisticsInfo.getAdoptId());
-//            AdoptUserAdopt adoptUserAdopt = new AdoptUserAdopt();
-//            if(adoptLogisticsInfo.getLogisticsContent().contains("已到达")){
-//                adoptUserAdoptExample.createCriteria().andAdoptStateEqualTo(AdoptStateEnum.SENDING.getValue());
-//                adoptUserAdopt.setAdoptState(AdoptStateEnum.EXPERIENCING.getValue());
-//                adoptUserAdoptMapper.updateByExampleSelective(adoptUserAdopt,adoptUserAdoptExample);
-//            }else if(adoptLogisticsInfo.getLogisticsContent().contains("已返还")){
-//                adoptUserAdoptExample.createCriteria().andAdoptStateEqualTo(AdoptStateEnum.APPLY_REFUND.getValue());
-//                adoptUserAdopt.setAdoptState(AdoptStateEnum.REFUNDED.getValue());
-//                String description="体验退还";
-//                byte state=2; //已退还
-//                cashInfoService.insert(adoptLogisticsInfo.getAdoptId(),state,description,"");
-//                adoptUserAdoptMapper.updateByExampleSelective(adoptUserAdopt,adoptUserAdoptExample);
-//            }
-//
-//            adoptLogisticsInfo.setUpdateTime(System.currentTimeMillis());
-//            adoptLogisticsInfo.setCreateTime(System.currentTimeMillis());
-//            return adoptLogisticsInfoMapper.insertSelective(adoptLogisticsInfo) > 0;
-//        }catch (Exception e){
-//            throw e;
-//        }
-//    }
+    @Transactional
+    public boolean insert(AdoptLogisticsInfo adoptLogisticsInfo) {
+        try{
+            AdoptUserAdoptExample adoptUserAdoptExample = new AdoptUserAdoptExample();
+            adoptUserAdoptExample.createCriteria().andAdoptIdEqualTo(adoptLogisticsInfo.getAdoptId());
+            AdoptUserAdopt adoptUserAdopt = new AdoptUserAdopt();
+            if(adoptLogisticsInfo.getLogisticsContent().contains("已到达")){
+                adoptUserAdoptExample.createCriteria().andAdoptStateEqualTo(AdoptStateEnum.SENDING.getValue());
+                adoptUserAdopt.setAdoptState(AdoptStateEnum.EXPERIENCING.getValue());
+                adoptUserAdoptMapper.updateByExampleSelective(adoptUserAdopt,adoptUserAdoptExample);
+            }else if(adoptLogisticsInfo.getLogisticsContent().contains("已返还")){
+                adoptUserAdoptExample.createCriteria().andAdoptStateEqualTo(AdoptStateEnum.APPLY_REFUND.getValue());
+                adoptUserAdopt.setAdoptState(AdoptStateEnum.REFUNDED.getValue());
+                String description="体验退还";
+                byte state=2; //已退还
+                cashInfoService.insert(adoptLogisticsInfo.getAdoptId(),state,description,"");
+                adoptUserAdoptMapper.updateByExampleSelective(adoptUserAdopt,adoptUserAdoptExample);
+            }
+
+            adoptLogisticsInfo.setUpdateTime(System.currentTimeMillis());
+            adoptLogisticsInfo.setCreateTime(System.currentTimeMillis());
+            return adoptLogisticsInfoMapper.insertSelective(adoptLogisticsInfo) > 0;
+        }catch (Exception e){
+            throw e;
+        }
+    }
 
     /**
      * 根据id删除数据

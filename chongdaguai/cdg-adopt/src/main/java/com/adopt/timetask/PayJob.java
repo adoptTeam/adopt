@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
  */
 public class PayJob {
     @Autowired
-//    private UserService userService;
+    private UserService userService;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     /**
@@ -21,7 +21,7 @@ public class PayJob {
     public void dueToPay() {
         //System.out.println("定时任务：删除adopt_user_adopt表中待支付状态，且超过15分钟的数据 开始");
         try {
-//            int deleteCount = userService.deleteOrderByStatusAndCreatetime();
+            int deleteCount = userService.deleteOrderByStatusAndCreatetime();
         } catch (Exception e) {
             System.out.println("定时任务：删除adopt_user_adopt表中待支付状态，且超过15分钟的数据 发生异常");
             e.printStackTrace();
