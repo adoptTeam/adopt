@@ -2,7 +2,6 @@ package com.adopt.user.controller;
 
 import com.adopt.common.controller.BaseController;
 import com.adopt.user.model.AddressModel;
-import com.adopt.user.service.UserAddressService;
 import com.cdg.common.utils.ServletUtils;
 import com.cdg.db.user.model.AdoptUser;
 import com.cdg.db.user.model.AdoptUserAddress;
