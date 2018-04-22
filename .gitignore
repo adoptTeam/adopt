@@ -163,6 +163,7 @@ stats.json
 npm-debug.log
 .idea
 .idea/
+.git/
 
 # product config
 properties_remote
