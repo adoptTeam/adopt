@@ -4,6 +4,7 @@ import com.adopt.common.service.CommonService;
 import com.adopt.littlepet.model.LittlePetViewModel;
 import com.adopt.littlepet.service.CommentService;
 import com.adopt.littlepet.service.LittlePetService;
+import com.adopt.user.service.UserService;
 import com.adopt.util.DownImage;
 import com.adopt.util.WaterMarkUtils;
 import com.cdg.common.exception.ToUserException;
