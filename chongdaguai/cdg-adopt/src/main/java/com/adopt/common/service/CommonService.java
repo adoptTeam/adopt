@@ -5,6 +5,7 @@ import com.cdg.common.constant.RedisConstants;
 import com.cdg.common.utils.JsonUtils;
 import com.cdg.db.user.model.AdoptUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author: fengyao
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @ver: 1.0
  * @desc: 公共Service
  */
+@Service
 public class CommonService {
 
     @Autowired

@@ -8,7 +8,7 @@ import com.adopt.common.service.CommonService;
 
 import com.adopt.user.model.AdoptInfo;
 import com.adopt.user.service.UserService;
-import com.adopt.utils.RedisHelper;
+import com.adopt.util.RedisHelper;
 import com.adopt.wxpay.service.CashInfoService;
 import com.cdg.common.enums.AdoptStateEnum;
 import com.cdg.common.exception.ToUserException;

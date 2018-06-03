@@ -1,6 +1,6 @@
 package com.adopt.login.service;
 
-import com.adopt.utils.RedisHelper;
+import com.adopt.util.RedisHelper;
 import com.cdg.common.constant.RedisConstants;
 import com.cdg.common.constant.StateConstants;
 import com.cdg.common.utils.JsonUtils;

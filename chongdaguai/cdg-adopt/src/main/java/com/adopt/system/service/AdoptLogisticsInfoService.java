@@ -1,5 +1,6 @@
 package com.adopt.system.service;
 
+import com.adopt.wxpay.service.CashInfoService;
 import com.cdg.common.enums.AdoptStateEnum;
 import com.cdg.common.utils.ValidatorUtils;
 import com.cdg.db.system.dao.AdoptLogisticsInfoMapper;
